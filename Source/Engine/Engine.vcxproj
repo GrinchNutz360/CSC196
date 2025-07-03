@@ -129,6 +129,11 @@
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Math.h" />
+    <ClInclude Include="Core\Random.h" />
+    <ClInclude Include="Core\Time.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
