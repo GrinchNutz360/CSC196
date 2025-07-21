@@ -1,5 +1,7 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include <algorithm>
+#include <cmath>
 namespace viper {
 	namespace math {
 		constexpr float pi = 3.14159265358979323846f;
@@ -22,5 +24,11 @@ namespace viper {
 		using std::min;
 		using std::max;
 		using std::clamp;
+		using std::sqrt;
+		using std::sqrtf;
+		using std::sin;
+		using std::sinf;
+		using std::cos;
+		using std::cosf;
 	}
 }
