@@ -152,16 +152,20 @@
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Input\InputSystems.cpp" />
+    <ClCompile Include="Renderer\Model.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioSystem.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Random.h" />
+    <ClInclude Include="Core\StringHelper.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Input\InputSystems.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Renderer\Model.h" />
     <ClInclude Include="Renderer\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

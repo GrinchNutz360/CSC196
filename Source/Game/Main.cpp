@@ -3,8 +3,11 @@
 #include "Core/Random.h"
 #include "Core/Time.h"
 #include "Renderer/Renderer.h"
+#include "Renderer/Model.h"
 #include "Input/InputSystems.h"
 #include "Audio/AudioSystem.h"
+#include "Math/Vector3.h"
+
 
 
 #include <iostream>
@@ -26,6 +29,17 @@ int main(int argc, char* argv[]) {
     viper::AudioSystem audio;
 	audio.Initialize();
 
+    std::vector<viper::vec2> points{
+        { -5, -5 },
+        { 5, -5 },
+        { 5, 5 },
+        { -5, 5 },
+        {-5, -5}
+    };
+
+    viper::Model model{ points, {0,0,1} };
+
+
     SDL_Event e;
     bool quit = false;
 
@@ -45,7 +59,7 @@ int main(int argc, char* argv[]) {
 	audio.AddSound("cowbell.wav", "cowbell");
     
 
-    std::vector<viper::vec2> points;
+    //std::vector<viper::vec2> points;
     //MAIN LOOP
     while (!quit) {
         time.Tick();
@@ -54,14 +68,18 @@ int main(int argc, char* argv[]) {
                 quit = true;
             }
         }
+
+        if( input.GetKeyPressed(SDL_SCANCODE_ESCAPE)) {
+            quit = true;
+		}
         
 
 		//update audio system
         audio.Update();
         if (input.GetKeyPressed(SDL_SCANCODE_B)) {audio.PlaySound("bass");}
-        if (input.GetKeyPressed(SDL_SCANCODE_S)) { audio.PlaySound("snare");}
+        if (input.GetKeyPressed(SDL_SCANCODE_S)) {audio.PlaySound("snare");}
         if (input.GetKeyPressed(SDL_SCANCODE_O)) {audio.PlaySound("open-hat");}
-        if (input.GetKeyPressed(SDL_SCANCODE_C)) { audio.PlaySound("clap");}
+        if (input.GetKeyPressed(SDL_SCANCODE_C)) {audio.PlaySound("clap");}
         if (input.GetKeyPressed(SDL_SCANCODE_K)) {audio.PlaySound("cowbell");}
 
 
@@ -79,11 +97,16 @@ int main(int argc, char* argv[]) {
 
 
         //draw
-        renderer.SetColor(0, 0, 0);
+        viper::vec3 color{ 0,0,0 };
+
+        renderer.SetColor(color.r, color.g, color.b);
         renderer.Clear();
+
+        model.Draw(renderer, input.GetMousePosition(), time.GetTime(), 10.0f);
+        
         for (int i = 0; i < (int)points.size() - 1; i++) {
             // set color or random color
-			renderer.SetColor(viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256));
+			renderer.SetColor((uint8_t)viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256));
             renderer.DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
         }
 

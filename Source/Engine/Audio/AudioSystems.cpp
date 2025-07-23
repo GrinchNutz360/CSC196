@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "../Core/StringHelper.h"
 #include <fmod_errors.h>
 #include <iostream>
 
@@ -31,6 +32,10 @@ namespace viper {
 
 		return true;
 	}
+
+	/// <summary>
+	/// Shuts down the audio system and releases associated resources.
+	/// </summary>
 	void AudioSystem::Shutdown() {
 		CheckFMODResult(m_system->release());
 	}
@@ -38,14 +43,51 @@ namespace viper {
 	void AudioSystem::Update() {
 		CheckFMODResult(m_system->update());
 	}
+
+	/// <summary>
+	/// Attempts to add a new sound to the audio system from a file, associating it with a specified name or the filename if no name is provided.
+	/// </summary>
+	/// <param name="filename">The path to the audio file to load.</param>
+	/// <param name="name">The name to associate with the loaded sound. If empty, the filename is used as the key.</param>
+	/// <returns>Returns false if the sound could not be added (e.g., if the name already exists or loading fails).</returns>
 	bool AudioSystem::AddSound(const std::string& filename, const std::string& name)
 	{
-		//    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound);
+		std::string key = (name.empty()) ? filename : name;
+		key = tolower(key); // Convert key to lowercase for consistency
 
-		return false;
+
+		//check if key exists in sounds map
+		if(m_sounds.find(key) != m_sounds.end()) {
+			std::cerr << "Audio System : name already exists " << key << std::endl;
+			return false;
+		}
+
+		//create sound from key 
+		FMOD::Sound* sound = nullptr;
+		FMOD_RESULT result = m_system->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+		if (!CheckFMODResult(result)) return false;
+
+		//insert sound into map
+		m_sounds[key] = sound;
+
+		return true;
 	}
 	bool AudioSystem::PlaySound(const std::string& name)
 	{
-		return false;
+		std::string key = name;
+		key = tolower(key); // Convert key to lowercase for consistency
+
+
+		// check if sound exists in sound map
+		if (m_sounds.find(key) == m_sounds.end()) {
+			std::cerr << "Audio System : name doesn't exists " << key << std::endl;
+			return false;
+		}
+
+		//play sound from key
+		FMOD_RESULT result = m_system->playSound(m_sounds[key], 0, false, nullptr);
+		if (CheckFMODResult(result)) return false;
+
+		return true;
 	}
 }

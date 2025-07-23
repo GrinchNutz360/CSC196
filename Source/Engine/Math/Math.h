@@ -30,5 +30,7 @@ namespace viper {
 		using std::sinf;
 		using std::cos;
 		using std::cosf;
+		using std::atan2;
+		using std::atan2f;
 	}
 }
