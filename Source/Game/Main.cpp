@@ -4,12 +4,14 @@
 #include "Core/Time.h"
 #include "Renderer/Renderer.h"
 #include "Input/InputSystems.h"
+#include "Audio/AudioSystem.h"
 
-#include <SDL3/SDL.h>
+
 #include <iostream>
 #include <vector>
 
 int main(int argc, char* argv[]) {
+	//initialize engines
     srand(std::time(0));
     viper::Renderer renderer;
     viper::Time time;
@@ -19,6 +21,10 @@ int main(int argc, char* argv[]) {
 
     viper::InputSystem input;
 	input.Initialize();
+
+    // create audio system
+    viper::AudioSystem audio;
+	audio.Initialize();
 
     SDL_Event e;
     bool quit = false;
@@ -30,6 +36,15 @@ int main(int argc, char* argv[]) {
     }
 //    vec2 v(30, 40);
 
+
+	//iniialize sounds
+	audio.AddSound("bass.wav", "bass");
+	audio.AddSound("snare.wav", "snare");
+	audio.AddSound("open-hat.wav", "open-hat");
+	audio.AddSound("clap.wav", "clap");
+	audio.AddSound("cowbell.wav", "cowbell");
+    
+
     std::vector<viper::vec2> points;
     //MAIN LOOP
     while (!quit) {
@@ -39,6 +54,19 @@ int main(int argc, char* argv[]) {
                 quit = true;
             }
         }
+        
+
+		//update audio system
+        audio.Update();
+        if (input.GetKeyPressed(SDL_SCANCODE_B)) {audio.PlaySound("bass");}
+        if (input.GetKeyPressed(SDL_SCANCODE_S)) { audio.PlaySound("snare");}
+        if (input.GetKeyPressed(SDL_SCANCODE_O)) {audio.PlaySound("open-hat");}
+        if (input.GetKeyPressed(SDL_SCANCODE_C)) { audio.PlaySound("clap");}
+        if (input.GetKeyPressed(SDL_SCANCODE_K)) {audio.PlaySound("cowbell");}
+
+
+
+        //update engines
         input.Update();
         if (input.GetMouseButtonPressed(viper::InputSystem::MouseButton::Left)) {
             points.push_back(input.GetMousePosition());
@@ -49,6 +77,8 @@ int main(int argc, char* argv[]) {
             else if ((position - points.back()).Length() > 10) points.push_back(position);
         }
 
+
+        //draw
         renderer.SetColor(0, 0, 0);
         renderer.Clear();
         for (int i = 0; i < (int)points.size() - 1; i++) {
@@ -70,7 +100,6 @@ int main(int argc, char* argv[]) {
 		viper::vec2 mouse = input.GetMousePosition();
 		std::cout << mouse.x << " " << mouse.y << std::endl;*/
 
-        //renderer.SetColor(0,0,0);
         
 
 
@@ -98,10 +127,10 @@ int main(int argc, char* argv[]) {
             //renderer.DrawPoint(v.x, v.y);
             //renderer.DrawPoint(viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024);
 
-        //}
         renderer.Present();
     }
     renderer.Shutdown();
+    audio.Shutdown();
 
         return 0;
 }

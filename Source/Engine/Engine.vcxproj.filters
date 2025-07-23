@@ -21,6 +21,9 @@
     <Filter Include="Source\Core\Input">
       <UniqueIdentifier>{46b6fd33-c0bd-4222-a80d-848fbf5ee94b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Audio">
+      <UniqueIdentifier>{1d8b502f-fa7a-4ed2-a867-c42e042eb9fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="Input\InputSystems.cpp">
       <Filter>Source\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\AudioSystems.cpp">
+      <Filter>Source\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="Input\InputSystems.h">
       <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioSystem.h">
+      <Filter>Source\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
