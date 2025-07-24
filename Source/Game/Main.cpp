@@ -30,11 +30,11 @@ int main(int argc, char* argv[]) {
 	audio.Initialize();
 
     std::vector<viper::vec2> points{
-        { -5, -5 },
-        { 5, -5 },
-        { 5, 5 },
-        { -5, 5 },
-        {-5, -5}
+        { 5, 0 },
+        { -2, 3 },
+        { 0, 0 },
+        { -2, -3 },
+        { 5, 0}
     };
 
     viper::Model model{ points, {0,0,1} };
