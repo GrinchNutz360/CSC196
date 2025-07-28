@@ -32,26 +32,29 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Renderer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Time.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Input\InputSystems.cpp">
       <Filter>Source\Core\Input</Filter>
     </ClCompile>
     <ClCompile Include="Audio\AudioSystems.cpp">
       <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Model.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Scene.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Actor.cpp">
       <Filter>Source\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game.cpp">
+      <Filter>Source\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Model.cpp">
+      <Filter>Source\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Renderer.cpp">
+      <Filter>Source\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Time.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +98,12 @@
       <Filter>Source\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Scene.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game.h">
       <Filter>Source\Framework</Filter>
     </ClInclude>
   </ItemGroup>
