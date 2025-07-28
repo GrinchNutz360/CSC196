@@ -8,8 +8,8 @@
 #include "Input/InputSystems.h"
 #include "Audio/AudioSystem.h"
 #include "Math/Vector3.h"
-#include "Game/Actor.h"
-#include "Game/Scene.h"
+#include "Framework/Actor.h"
+#include "Framework/Scene.h"
 
 #include "Game/Player.h"
 
