@@ -1,11 +1,12 @@
 #pragma once
 #include "../Math/Transform.h"
+#include <memory>
 
 namespace viper {
 	class Actor {
 	public:
 		Actor() = default;
-		Actor(const Transform& transform, class Model* model) :
+		Actor(const Transform& transform, std::shared_ptr<class Model> model) :
 			m_transform{ transform } 
 			, m_model{ model }
 		{}
@@ -17,6 +18,7 @@ namespace viper {
 
 	protected:
 		Transform m_transform;
-		Model* m_model;
+		std::shared_ptr<Model> m_model;
+		
 	};
 }
