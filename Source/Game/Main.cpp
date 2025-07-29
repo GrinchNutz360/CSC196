@@ -11,6 +11,8 @@
 #include "Framework/Actor.h"
 #include "Framework/Scene.h"
 #include "Engine.h"
+#include "Renderer/Text.h"
+#include "Renderer/Font.h"
 
 #include "Game/Player.h"
 #include "Game/SpaceGame.h"
@@ -21,8 +23,15 @@
 
 
 int main(int argc, char* argv[]) {
+    //Font stuff
+
 	//initialize engine
 	viper::GetEngine().Initialize();
+
+    viper::Font* font = new viper::Font();
+    font->Load("ArcadeClassic.ttf", 50);
+    viper::Text* text = new viper::Text(font);
+    text->Create(viper::GetEngine().GetRenderer(), "Score:", viper::vec3{1, 1, 1});
 
     //initialize game
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
@@ -61,6 +70,7 @@ int main(int argc, char* argv[]) {
         if( viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) {
             quit = true;
 		}
+
         
 
 		//update audio system
@@ -91,6 +101,8 @@ int main(int argc, char* argv[]) {
 
         viper::GetEngine().GetRenderer().SetColor(color.r, color.g, color.b);
         viper::GetEngine().GetRenderer().Clear();
+
+        text->Draw(viper::GetEngine().GetRenderer(), 40.0f, 40.0f);
 
         //model.Draw(renderer, input.GetMousePosition(), time.GetTime(), 10.0f);
 		//model.Draw(renderer, transform);

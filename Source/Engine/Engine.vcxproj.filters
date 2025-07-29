@@ -56,6 +56,12 @@
     <ClCompile Include="Core\Time.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\Font.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Text.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
@@ -105,6 +111,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Game.h">
       <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Font.h">
+      <Filter>Source\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Text.h">
+      <Filter>Source\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
