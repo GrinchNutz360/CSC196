@@ -18,11 +18,45 @@
 #include "Game/SpaceGame.h"
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <memory>
 
 
 int main(int argc, char* argv[]) {
+    // Test getInt() variants
+    std::cout << "Integer Functions:\n";
+    std::cout << "getInt(): " << viper::random::getInt() << "\n";
+    std::cout << "getInt(): " << viper::random::getInt() << "\n";
+    std::cout << "getInt(10): " << viper::random::getInt(10) << "\n";
+    std::cout << "getInt(10): " << viper::random::getInt(10) << "\n";
+    std::cout << "getInt(5, 15): " << viper::random::getInt(5, 15) << "\n";
+    std::cout << "getInt(5, 15): " << viper::random::getInt(5, 15) << "\n";
+    std::cout << "getInt(-10, 10): " << viper::random::getInt(-10, 10) << "\n\n";
+
+    // Test getReal() variants with float
+    std::cout << "Float Functions:\n";
+    std::cout << std::fixed << std::setprecision(6);
+    std::cout << "getReal<float>(): " << viper::random::getReal<float>() << "\n";
+    std::cout << "getReal<float>(): " << viper::random::getReal<float>() << "\n";
+    std::cout << "getReal<float>(5.0f): " << viper::random::getReal<float>(5.0f) << "\n";
+    std::cout << "getReal<float>(2.5f, 7.5f): " << viper::random::getReal<float>(2.5f, 7.5f) << "\n";
+    std::cout << "getReal<float>(-1.0f, 1.0f): " << viper::random::getReal<float>(-1.0f, 1.0f) << "\n\n";
+
+    // Test getReal() variants with double
+    std::cout << "Double Functions:\n";
+    std::cout << std::setprecision(10);
+    std::cout << "getReal<double>(): " << viper::random::getReal<double>() << "\n";
+    std::cout << "getReal<double>(100.0): " << viper::random::getReal<double>(100.0) << "\n";
+    std::cout << "getReal<double>(0.0, 2.0): " << viper::random::getReal<double>(0.0, 2.0) << "\n\n";
+
+    // Test getBool()
+    std::cout << "Boolean Functions:\n";
+    for (int i = 0; i < 10; ++i) {
+        std::cout << "getBool(): " << std::boolalpha << viper::random::getBool() << "\n";
+    }
+    std::cout << "\n";
+
     //Font stuff
 
 	//initialize engine
@@ -43,7 +77,7 @@ int main(int argc, char* argv[]) {
     //create stars
     std::vector<viper::vec2> stars;
     for (int i = 0; i < 100; i++) {
-        stars.push_back(viper::vec2{ viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024 });
+        stars.push_back(viper::vec2{ viper::random::getReal() * 1280, viper::random::getReal() * 1024 });
     }
 //    vec2 v(30, 40);
 
@@ -93,7 +127,7 @@ int main(int argc, char* argv[]) {
             if (star[0] > 1280) star[0] = 0;
             if (star[0] < 0) star[0] = 1280;
 
-            viper::GetEngine().GetRenderer().SetColor((uint8_t)viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256));
+            viper::GetEngine().GetRenderer().SetColor((uint8_t)viper::random::getInt(256), viper::random::getInt(256), viper::random::getInt(256));
             viper::GetEngine().GetRenderer().DrawPoint(star.x, star.y);
         }
 

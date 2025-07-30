@@ -38,10 +38,10 @@ bool SpaceGame::Initialize()
 	//create enemies
     std::shared_ptr<viper::Model> enemyModel = std::make_shared<viper::Model>(points, viper::vec3{ 1.0f, 0.0f, 0.0f });
     for (int i = 0; i < 10; i++) {
-        viper::Transform transform{ {viper::random::getRandomFloat() * viper::GetEngine().GetRenderer().GetWidth(), viper::random::getRandomFloat() * viper::GetEngine().GetRenderer().GetHeight()}, 0, 10 };
+        viper::Transform transform{ {viper::random::getReal() * viper::GetEngine().GetRenderer().GetWidth(), viper::random::getReal() * viper::GetEngine().GetRenderer().GetHeight()}, 0, 10 };
         std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, enemyModel);
 		enemy->damping = 1.5f;
-        enemy->speed = (viper::random::getRandomFloat() * 800) + 500;
+        enemy->speed = (viper::random::getReal() * 800) + 500;
         m_scene->AddActor(std::move(enemy));
     }
          return false;
