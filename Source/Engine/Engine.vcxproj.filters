@@ -57,10 +57,10 @@
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Font.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Text.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
