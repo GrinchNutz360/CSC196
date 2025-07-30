@@ -67,34 +67,9 @@ int main(int argc, char* argv[]) {
 		viper::GetEngine().Update();
 		game->Update();
 
-        if( viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) {
+        if (viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) {
             quit = true;
-		}
-
-        
-
-		//update audio system
-        /*if (input.GetKeyPressed(SDL_SCANCODE_B)) {audio.PlaySound("bass");}
-        if (input.GetKeyPressed(SDL_SCANCODE_S)) {audio.PlaySound("snare");}
-        if (input.GetKeyPressed(SDL_SCANCODE_O)) {audio.PlaySound("open-hat");}
-        if (input.GetKeyPressed(SDL_SCANCODE_C)) {audio.PlaySound("clap");}
-        if (input.GetKeyPressed(SDL_SCANCODE_K)) {audio.PlaySound("cowbell");}*/
-
-
-        //if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) viper::mattransform.rotation -= viper::math::degToRad(90 * viper::GetEngine().GetTime().GetDeltaTime());
-        //if (input.GetKeyDown(SDL_SCANCODE_D)) transform.rotation += viper::math::degToRad(90 * time.GetDeltaTime());
-        
-
-        //update engines
-      /*  if (input->GetMouseButtonPressed(viper::InputSystem::MouseButton::Left)) {
-            points.push_back(input->GetMousePosition());
         }
-        if (input->GetMouseButtonDown(viper::InputSystem::MouseButton::Left)) {
-            viper::vec2 position = input->GetMousePosition();
-            if (points.empty()) points.push_back(position);
-            else if ((position - points.back()).Length() > 10) points.push_back(position);
-        }*/
-
 
         //draw
         viper::vec3 color{ 0,0,0 };

@@ -3,6 +3,10 @@
 
 class Player : public viper::Actor {
 public:
+	float speed = 200;
+	float rotationRate = 180;
+
+public:
 	Player() = default;
 	Player(const viper::Transform& transform, std::shared_ptr<viper::Model> model) :
 		Actor{ transform , model }
