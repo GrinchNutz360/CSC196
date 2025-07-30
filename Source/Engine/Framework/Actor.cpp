@@ -5,6 +5,8 @@ namespace viper {
 	void viper::Actor::Update(float dt)
 	{
 
+		m_transform.position += velocity * dt;
+
 	}
 
 	void viper::Actor::Draw(Renderer& renderer)

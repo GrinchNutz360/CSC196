@@ -22,8 +22,17 @@ namespace viper {
 
 		void DrawLine(float x1, float y1, float x2, float y2);
 		void DrawPoint(float x, float y);
+
+		int GetWidth() const { return m_width; }
+		int GetHeight() const { return m_height; }
+
 	private:
 		friend class Text;
+
+		int m_width{ 0 };
+		int m_height{ 0 };
+
+
 		SDL_Window* m_window = nullptr;
 		SDL_Renderer* m_renderer = nullptr;
 

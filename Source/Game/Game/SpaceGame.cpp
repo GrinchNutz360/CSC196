@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Core/Random.h"
 #include "Engine.h"
+#include "Renderer/Renderer.h"
 
 #include <vector>
 bool SpaceGame::Initialize()
@@ -22,14 +23,19 @@ bool SpaceGame::Initialize()
     std::shared_ptr<viper::Model> model = std::make_shared<viper::Model>(points, viper::vec3{ 0,0,1 });
     //viper::Model* model = new viper::Model{ points, viper::vec3{0,0,1} };
 
+    viper::Transform transform{viper::vec2 { viper::GetEngine().GetRenderer().GetWidth() * 0.5f, viper::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 10};
+    std::unique_ptr<Player> player = std::make_unique<Player>(transform, model);
+    m_scene->AddActor(std::move(player));
+
+
     viper::Scene scene;
 
-    for (int i = 0; i < 10; i++) {
-        viper::Transform transform{ {viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024}, 0, 10 };
-        std::unique_ptr<Player> player = std::make_unique<Player>(transform, model);
-        m_scene->AddActor(std::move(player));
-    }
-    return false;
+//    for (int i = 0; i < 10; i++) {
+//        viper::Transform transform{ {viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024}, 0, 10 };
+//        std::unique_ptr<Player> player = std::make_unique<Player>(transform, model);
+//        m_scene->AddActor(std::move(player));
+//    }
+         return false;
 }
 
 void SpaceGame::Update()
