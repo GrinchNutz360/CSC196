@@ -4,6 +4,8 @@
 class Enemy : public viper::Actor {
 public:
 	float speed = 200;
+	float fireTimer = 0;
+	float fireTime = 0;
 public:
 	Enemy() = default;
 	Enemy(const viper::Transform& transform, std::shared_ptr<viper::Model> model) :
@@ -13,6 +15,7 @@ public:
 
 	void Update(float dt) override;
 
-private:
+	// Inherited via Actor
+	void OnCollision(Actor* other) override;
 
 };

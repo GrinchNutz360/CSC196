@@ -1,0 +1,46 @@
+#include "ParticleSystem.H"
+#include "../Renderer/Renderer.h"
+
+namespace viper {
+	bool ParticleSystem::Initialize() {
+		//reserve particles in pool
+		m_particles.resize(1000);
+		return true;
+	}
+	void ParticleSystem::Shutdown() {
+		m_particles.clear();
+	}
+	void ParticleSystem::Update(float dt) {
+		for (auto& particle : m_particles) {
+			if (particle.active) {
+				particle.lifeSpan -= dt;
+				particle.active = (particle.lifeSpan > 0);
+				particle.position += particle.velocity * dt;
+			}
+		}
+	}
+	void ParticleSystem::Draw(Renderer& renderer) {
+		for (auto& particle : m_particles) {
+			if (particle.active) {
+				renderer.SetColor(particle.color.r, particle.color.g, particle.color.b);
+				renderer.DrawPoint(particle.position.x, particle.position.y);
+			}
+		}
+	}
+	void ParticleSystem::AddParticle(const Particle particle)
+	{
+		Particle* pParticle = GetFreeParticle();
+		if (pParticle) {
+			*pParticle = particle;
+			pParticle->active = true;
+		}
+	}
+	Particle* ParticleSystem::GetFreeParticle()
+	{
+		for (auto& particle : m_particles) {
+			if (!particle.active) return &particle;
+		}
+
+		return nullptr;
+	}
+} 

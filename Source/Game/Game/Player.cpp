@@ -2,9 +2,25 @@
 #include "Engine.h"
 #include "Input/InputSystems.h"
 #include "Renderer/Renderer.h"
+#include "../GameData.h"
+#include "Math/Vector3.h"
+#include "Framework/Scene.h"
+#include "Rocket.h"
+#include "Core/Random.h"
+#include"Renderer/ParticleSystem.H"
+#include "Renderer/Model.h"
+#include "SpaceGame.h"
+#include "Audio/AudioSystem.h"
 
 void Player::Update(float dt)
 {
+    viper::Particle particle;
+    particle.position = m_transform.position;
+    particle.velocity = viper::vec2{ viper::random::getReal(-200.0f, 200.0f), viper::random::getReal(-200.0f, 200.0f) };
+    particle.color = viper::vec3{ 1,1,1 };
+	particle.lifeSpan = 2;
+	viper::GetEngine().GetPS().AddParticle(particle);
+
     //rotation
     float rotate = 0;
     if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
@@ -26,9 +42,26 @@ void Player::Update(float dt)
 
     //check fire key pressed
     //spawn rocket at player position and rotation
-    if (viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
-       
+    fireTimer -= dt;
+    if (viper::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_SPACE) && fireTimer <= 0) {
+        fireTimer = fireTime;
+
+        std::shared_ptr<viper::Model> model = std::make_shared<viper::Model>(GameData::rocketPoints, viper::vec3{ 1,1,1 });
+        viper::Transform transform{ this->m_transform.position, this->m_transform.rotation, 2.0f };
+        auto rocket = std::make_unique<Rocket>(transform, model);
+        rocket->speed = 1500.0f;
+        rocket->tag = "Player";
+        rocket->name = "Rocket";
+        scene->AddActor(std::move(rocket));
 	}
 
     Actor::Update(dt);
+}
+
+void Player::OnCollision(Actor* other)
+{
+    if (tag != other->tag) {
+        destroyed = true;
+        dynamic_cast<SpaceGame*>(scene->GetGame())->OnPlayerDeath();
+    }
 }

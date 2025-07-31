@@ -29,5 +29,19 @@ namespace viper{
 	{
 		Draw(renderer, transform.position, transform.rotation, transform.scale);
 	}
+
+	/// <summary>
+	/// Calculates and sets the radius of the model as the maximum distance from the origin among its points.
+	/// </summary>
+	void Model::CalculateRadius()
+	{
+		m_radius = 0;
+		for (auto& point : m_points) {
+			float length = point.Length();
+			if (length > m_radius) {
+				m_radius = length;
+			}
+		}
+	}
 }
 

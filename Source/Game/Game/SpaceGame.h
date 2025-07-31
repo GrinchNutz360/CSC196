@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Framework/Game.h"
+#include "Renderer/Font.h"
+#include "Renderer/Text.h"
 
 class SpaceGame : public viper::Game {
 public: 
@@ -20,9 +22,20 @@ public:
 	void Shutdown() override;
 
 	void Update(float dt) override;
-	void Draw() override;
+	void Draw(class viper::Renderer& renderer) override;
+
+	void OnPlayerDeath();
 
 private:
 	GameState m_gameState = GameState::Initialize;
 	float m_enemySpawnTimer{ 0 };
+	float m_stateTimer{ 0 };
+
+	std::shared_ptr<class viper::Font> m_titleFont;
+	std::shared_ptr<class viper::Font> m_uiFont;
+
+	std::unique_ptr<class viper::Text> m_titleText;
+	std::unique_ptr<class viper::Text> m_scoreText;
+	std::unique_ptr<class viper::Text> m_livesText;
+
 };

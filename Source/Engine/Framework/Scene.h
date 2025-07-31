@@ -3,14 +3,15 @@
 #include <memory>
 #include <string>
 #include "../Core/StringHelper.h"
-
+#include <list>
 
 namespace viper {
 	class Actor;
+	class Game;
 
 	class Scene {
 	public:
-		Scene() = default;
+		Scene(Game* game) : m_game{ game } {};
 		
 		void Update(float dt);
 		void Draw(class Renderer& renderer);
@@ -24,8 +25,11 @@ namespace viper {
 		 template<typename T = Actor>
 		 std::vector<T*> GetActorsByTag(const std::string& tag);
 
+		 Game* GetGame() { return m_game; }
+
 	private:
-		std::vector<std::unique_ptr<Actor>> m_actors;
+		Game* m_game{ nullptr };
+		std::list<std::unique_ptr<Actor>> m_actors;
 
 
 	};

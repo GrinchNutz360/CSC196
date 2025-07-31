@@ -13,6 +13,9 @@ namespace viper {
 		vec2 velocity{ 0, 0 };
 		float damping{ 0.2f };
 
+		bool destroyed{ false };
+		float lifeSpan{ 0.0f };
+
 		class Scene* scene{ nullptr };
 
 
@@ -25,6 +28,10 @@ namespace viper {
 
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
+
+		virtual void OnCollision(Actor* other) = 0;
+
+		float GetRadius();
 
 		Transform& GetTransform() { return m_transform; }
 
