@@ -9,6 +9,7 @@ namespace viper {
 		std::string name;
 		std::string tag;
 
+
 		vec2 velocity{ 0, 0 };
 		float damping{ 0.2f };
 

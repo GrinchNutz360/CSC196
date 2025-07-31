@@ -24,7 +24,11 @@ void Player::Update(float dt)
     m_transform.position.x = viper::math::wrap(m_transform.position.x, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
     m_transform.position.y = viper::math::wrap(m_transform.position.y, 0.0f, (float)viper::GetEngine().GetRenderer().GetWidth());
 
-
+    //check fire key pressed
+    //spawn rocket at player position and rotation
+    if (viper::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
+       
+	}
 
     Actor::Update(dt);
 }

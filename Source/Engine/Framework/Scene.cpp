@@ -36,13 +36,10 @@ namespace viper {
 		actor->scene = this;
 		m_actors.push_back(std::move(actor));
 	}
-	Actor* Scene::GetActorByName(const std::string& name)
+
+	void Scene::RemoveAllActors()
 	{
-		for (auto& actor : m_actors) {
-			if (tolower(actor->name) == tolower(name)) {
-				return actor.get();
-			}
-		}
-		return nullptr;
+		m_actors.clear();
 	}
+	
 } 
