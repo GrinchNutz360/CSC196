@@ -70,6 +70,29 @@ namespace viper {
 
 			return v;
 		}
+
+		
+		static float Dot(const Vector2& a, const Vector2& b) {
+			return a.x * b.x + a.y * b.y;
+		}
+		
+		
+		static float Cross(const Vector2& a, const Vector2& b) {
+			return a.x * b.y - a.y * b.x;
+		}
+		
+		
+		static float AngleBetween(const Vector2& a, const Vector2& b) {
+			return math::acosf(Dot(a, b));
+		}
+
+		static float SignedAngleBetween(const Vector2& a, const Vector2& b) {
+			Vector2 v{ Dot(a,b), Cross(a,b) };
+		
+			return v.Angle();
+		}
+
+
 	};
 
 	using ivec2 = Vector2<int>;

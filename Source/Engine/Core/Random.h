@@ -1,4 +1,6 @@
 #pragma once
+#include "../Math/Vector2.h"
+#include "../Math/Math.h"
 #include <stdlib.h>
 #include <random>
 #include <memory>
@@ -94,6 +96,11 @@ namespace viper {
         inline bool getBool() {
             static std::bernoulli_distribution dist(0.5);
             return dist(generator());
+        }
+
+        inline vec2 onUnitCircle() {
+            float radians = getReal(math::twoPi);
+            return vec2{ math::cosf(radians), math::sinf(radians) };
         }
     }
 }

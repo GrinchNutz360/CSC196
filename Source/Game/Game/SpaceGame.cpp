@@ -12,9 +12,12 @@
 #include "Renderer/particleSystem.H"
 
 
+
 #include <vector>
 bool SpaceGame::Initialize()
 {
+    
+
 	m_scene = std::make_unique<viper::Scene>(this);
 
     m_titleFont = std::make_shared<viper::Font>();
@@ -75,16 +78,7 @@ void SpaceGame::Update(float dt)
         m_enemySpawnTimer -= dt;
         if (m_enemySpawnTimer <= 0) {
             m_enemySpawnTimer = 4;
-            //create enemies
-            std::shared_ptr<viper::Model> enemyModel = std::make_shared<viper::Model>(GameData::enemyPoints, viper::vec3{ 1.0f, 0.0f, 0.0f });
-            viper::Transform transform{ {viper::random::getReal() * viper::GetEngine().GetRenderer().GetWidth(), viper::random::getReal() * viper::GetEngine().GetRenderer().GetHeight()}, 0, 10 };
-            std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, enemyModel);
-            enemy->damping = 1.5f;
-            enemy->fireTime = 2;
-            enemy->fireTimer = 3;
-            enemy->speed = (viper::random::getReal() * 400) + 500;
-            enemy->tag = "Enemy";
-            m_scene->AddActor(std::move(enemy));
+            SpawnEnemy();
         
         }
 
@@ -143,6 +137,30 @@ void SpaceGame::OnPlayerDeath()
 {
 	m_gameState = GameState::PlayerDead;
 	m_stateTimer = 2.0f;
+}
+
+void SpaceGame::SpawnEnemy()
+{
+    Player* player = m_scene->GetActorByName<Player>("Player");
+    if (player) {
+        //create enemies
+        std::shared_ptr<viper::Model> enemyModel = std::make_shared<viper::Model>(GameData::enemyPoints, viper::vec3{ 1.0f, 0.0f, 0.0f });
+               
+       //spawn at random position away from player
+        viper::vec2 position = player->m_transform.position * viper::random::onUnitCircle() * viper::random::getReal(200.0f, 500.0f);
+
+        viper::Transform transform{ position, viper::random::getReal(0.0f, 360.0f), 10};
+
+        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, enemyModel);
+        enemy->damping = 1.5f;
+        enemy->fireTime = 2;
+        enemy->fireTimer = 3;
+        enemy->speed = (viper::random::getReal() * 400) + 500;
+        enemy->tag = "Enemy";
+        m_scene->AddActor(std::move(enemy));
+    }
+    
+
 }
 
 void SpaceGame::Shutdown()

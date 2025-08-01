@@ -2,9 +2,9 @@
 #include "../Renderer/Renderer.h"
 
 namespace viper {
-	bool ParticleSystem::Initialize() {
+	bool ParticleSystem::Initialize(int poolSize) {
 		//reserve particles in pool
-		m_particles.resize(1000);
+		m_particles.resize(poolSize);
 		return true;
 	}
 	void ParticleSystem::Shutdown() {
